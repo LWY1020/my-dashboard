@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const logs = [
             "[INFO] Initializing LWY Core Systems...",
-            "[INFO] Password: 20081020",
+            "[INFO] Password: 19960802",
             "[INFO] Syncing Robotics Database (FRC/FTC)...",
             "[SUCCESS] Neural Link: STABLE",
             ">> Welcome to LWY's personal portal."
