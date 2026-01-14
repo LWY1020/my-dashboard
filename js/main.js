@@ -1,10 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     const updateTime = () => {
-        const now = new Date();
-        const formattedDate = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')}`;
-        const timeEl = document.getElementById('update-time');
-        if (timeEl) timeEl.textContent = `Link Start: ${formattedDate}`;
-    };
+    const birthDate = new Date('2008-10-20T00:00:00'); 
+    const now = new Date();
+    const diffMs = Math.abs(now - birthDate);
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60)); 
+    
+    const timeEl = document.getElementById('update-time');
+    if (timeEl) {
+        timeEl.textContent = `Link Start: 2008.10.20 (Uptime: ${diffHours.toLocaleString()} Hours)`;
+    }
+};
+setInterval(updateTime, 1000);
     updateTime();
 
     const panels = document.querySelectorAll('.glass-card, .sao-panel');
