@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- 1. 時間與 Uptime 計算 ---
     const updateTime = () => {
         const birthDate = new Date('2008-10-20T00:00:00');
         const now = new Date();
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateTime, 1000);
     updateTime();
 
+    // --- 2. 面板入場動畫 ---
     const panels = document.querySelectorAll('.glass-card, .sao-panel');
     setTimeout(() => {
         panels.forEach((panel, index) => {
@@ -81,15 +83,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         setTimeout(processNextLog, 1500);
     };
-
     initTerminal();
 
+    const calculateDays = (startDateStr) => {
+        const start = new Date(startDateStr);
+        const now = new Date();
+        const diff = now - start;
+        return Math.floor(diff / (1000 * 60 * 60 * 24));
+    };
+
+    const frcRealDays = calculateDays('2024-07-17'); 
+    const ftcRealDays = calculateDays('2025-07-22'); 
+
     const skillData = [
-        { el: document.querySelector('.fill.blue-glow'), days: 545, label: "FRC" },
-        { el: document.querySelector('.fill.purple-glow'), days: 174, label: "FTC" }
+        { el: document.querySelector('.fill.blue-glow'), days: frcRealDays, label: "FRC" },
+        { el: document.querySelector('.fill.purple-glow'), days: ftcRealDays, label: "FTC" }
     ];
 
-    const maxDays = 545; 
+    const maxDays = Math.max(frcRealDays, 730); 
 
     skillData.forEach(skill => {
         if (!skill.el) return;
