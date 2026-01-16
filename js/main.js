@@ -1,35 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. 自動計算時間與 UPTIME 邏輯 ---
     const updateTime = () => {
-        const birthDate = new Date('2008-10-20T00:00:00'); // 生日
+        const birthDate = new Date('2008-10-20T00:00:00');
         const now = new Date();
-        
-        // A. 格式化今天的日期 (YYYY.MM.DD)
         const year = now.getFullYear();
         const month = String(now.getMonth() + 1).padStart(2, '0');
         const day = String(now.getDate()).padStart(2, '0');
         const formattedDate = `${year}.${month}.${day}`;
         
-        // B. 計算總小時數 (UPTIME)
         const diffMs = now - birthDate;
         const totalHours = Math.floor(diffMs / (1000 * 60 * 60)); 
         
-        // 更新大標題 (Link Start: 今日日期)
         const timeEl = document.getElementById('update-time');
         if (timeEl) timeEl.textContent = `Link Start: ${formattedDate}`;
 
-        // 更新 UPTIME 數據卡片 (顯示累計小時)
         const uptimeEl = document.getElementById('uptime-hours');
         if (uptimeEl) {
             uptimeEl.textContent = `${totalHours.toLocaleString()}h`;
         }
     };
 
-    // 每秒更新一次，確保數據即時
     setInterval(updateTime, 1000);
     updateTime();
 
-    // --- 2. 面板進場動畫 (維持原樣) ---
     const panels = document.querySelectorAll('.glass-card, .sao-panel');
     setTimeout(() => {
         panels.forEach((panel, index) => {
@@ -39,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, 100);
 
-    // --- 3. 終端機打字效果 (優化內容) ---
     const initTerminal = () => {
         const terminalBody = document.querySelector('.terminal-body');
         if (!terminalBody) return;
@@ -93,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initTerminal();
 
-    // --- 4. 技能條進度動畫 (維持原樣) ---
     const skillData = [
         { el: document.querySelector('.fill.blue-glow'), days: 545, label: "FRC" },
         { el: document.querySelector('.fill.purple-glow'), days: 174, label: "FTC" }
@@ -128,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(update);
     }
 
-    // --- 5. 滑鼠互動效果 (維持原樣) ---
     panels.forEach(card => {
         card.addEventListener('mousemove', e => {
             const rect = card.getBoundingClientRect();
