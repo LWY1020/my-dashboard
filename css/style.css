@@ -352,53 +352,74 @@ body {
     box-shadow: 0 4px 12px rgba(0, 229, 255, 0.35);
 }
 /* ===================================================
-   📱 終極 RWD 盾牌：消滅手機版黑邊與擠壓問題
+   📱 最終完美版：復刻電腦版選單 + 面板全螢幕填滿
    =================================================== */
 @media (max-width: 768px) {
     
-    /* 1. 🛡️ 門神設定：直接從根本砍斷「右邊虛無黑邊」與左右晃動 */
+    /* 1. 🛡️ 全域防禦依舊保留：防止任何橫向溢出 */
     html, body {
         width: 100% !important;
         max-width: 100% !important;
-        overflow-x: hidden !important; /* 🌟 關鍵：強制禁止橫向滾動 */
+        overflow-x: hidden !important;
         margin: 0 !important;
         padding: 0 !important;
     }
 
-    /* 2. 💥 強制分層：讓導覽列以及它裡面的外殼「絕對變成上下排」 */
-    header, header > div, .navbar, .header-container, #header {
+    /* 2. 🗺️ 頂部導覽列：復刻電腦版，左邊標題、右邊選單 */
+    header, .navbar, .header-container, #header {
         display: flex !important;
-        flex-direction: column !important; /* 🌟 關鍵：標題在上、選單在下 */
-        align-items: center !important;    /* 項目通通水平置中 */
-        justify-content: center !important;
+        flex-direction: row !important;         /* 🌟 關鍵：恢復和電腦版一樣的橫排 */
+        justify-content: space-between !important; /* 🌟 關鍵：左邊 Logo、右邊選單 */
+        align-items: center !important;
         width: 100% !important;
         height: auto !important;
-        min-height: unset !important;
-        padding: max(20px, env(safe-area-inset-top)) 10px 15px 10px !important;
+        padding: max(12px, env(safe-area-inset-top)) 4% 12px 4% !important; /* 縮小手機端上下間距 */
+        box-sizing: border-box !important;
     }
 
-    /* 3. 確保 LWY Dashboard 標題置中，不被推走 */
-    header h1, .logo, .brand, header [class*="logo"] {
-        text-align: center !important;
-        margin: 0 0 10px 0 !important; /* 下方留點空隙給選單 */
+    /* 調整 LWY Dashboard 標題字體，避免在手機上太大 */
+    header h1, .logo, .brand {
+        font-size: clamp(14px, 4vw, 18px) !important; /* 智慧型縮小字體 */
+        white-space: nowrap !important;
+        margin: 0 !important;
+    }
+
+    /* 3. 🧭 選單按鈕群：強制絕對橫排、縮小間距 */
+    nav, .nav-links, .nav-menu, header ul, nav ul {
+        display: flex !important;
+        flex-direction: row !important;         /* 強制橫排 */
+        flex-wrap: nowrap !important;           /* 絕對不准折行 */
+        justify-content: flex-end !important;   /* 靠右對齊 */
+        align-items: center !important;
+        gap: max(8px, 2vw) !important;          /* 縮小按鈕與按鈕之間的左右間距 */
+        margin: 0 !important;
+        padding: 0 !important;
         width: auto !important;
     }
 
-    /* 4. 確保選單在第二行完美橫排 */
-    nav, .nav-links, .nav-menu, header ul, nav ul {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        justify-content: center !important;
-        width: 100% !important;
-        gap: 15px !important;
-        margin: 0 !important;
-        padding: 0 !important;
+    /* 徹底解除文字變直的魔咒 */
+    nav li, .nav-links li, .nav-item,
+    nav a, .nav-links a, header a {
+        display: inline-block !important;
+        white-space: nowrap !important;         /* 🌟 核心：強制文字一整行，絕對不准變直！ */
+        font-size: 13px !important;             /* 稍微縮小字體以融入手機列 */
+        padding: 4px 6px !important;
+        width: auto !important;
     }
 
-    /* 5. 📦 防撐破機制：確保下方所有科技感大卡片、內容區不會超出手機螢幕 */
-    main, .container, .main-content, .card, .dashboard-layout, section, div {
-        max-width: 100% !important; 
-        box-sizing: border-box !important; /* 🌟 關鍵：讓 padding 算在寬度內，不撐破外殼 */
+    /* 4. 📦 版面填滿：讓下方的 Link Start 科技感大面板撐滿手機螢幕 */
+    main, .container, .dashboard, .dashboard-layout, .main-content, section {
+        width: 94% !important;                  /* 🌟 關鍵：將原本空曠的兩側留白縮小，讓版面佔滿 94% */
+        max-width: 100% !important;
+        margin: 15px auto !important;           /* 畫面上下一點間距，左右置中 */
+        padding: 10px !important;               /* 縮小內襯，留更多空間給內容 */
+        box-sizing: border-box !important;      /* 防止 padding 撐破外殼 */
+    }
+
+    /* 確保裡面的子面板、Console 也能跟著滿版 */
+    .card, .panel, .console-container, [class*="box"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 }
