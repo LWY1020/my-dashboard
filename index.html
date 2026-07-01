@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-
-    <nav class="glass-nav">
+<nav class="glass-nav">
         <div class="nav-container">
             <div class="logo">LWY Dashboard</div>
             <ul class="nav-links">
@@ -20,9 +19,10 @@
                     更多資訊 <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i>
                     <ul class="dropdown-menu">
                         <li id="sub-link-exp">競賽經歷</li>
-                        </ul>
+                        <li id="sub-link-special">特殊經驗</li>
+                    </ul>
                 </li>
-                </ul>
+            </ul>
         </div>
     </nav>
 <div class="main-container">
@@ -31,71 +31,187 @@
         <div id="page-home" class="page-content active">
             
             <div class="glass-card main-post visible">
-                <div class="user-title" style="width: fit-content; margin-bottom: 20px;">SYSTEM STATUS: ACTIVE</div>
                 
+                <div class="user-title" style="width: fit-content; margin-bottom: 20px;">SYSTEM STATUS: ACTIVE</div>
                 <div class="main-display">
                     <h2 id="update-time" class="user-name" style="font-size: 48px;">Link Start: LWY_Nexus</h2>
                     <p class="user-date" style="opacity: 0.7; margin-top: 10px;">Neural Link Established // Protocol 1020</p>
                 </div>
                 
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="m-label">LOGIC_TYPE</span>
+                        <span class="m-value">INTP-A</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="m-label">NETWORK</span>
+                        <span class="m-value">STABLE</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="m-label">UPTIME</span>
+                        <span id="uptime-hours" class="m-value">Loading...</span>
+                    </div>
                 </div>
-            
-        </div> <div id="page-about" class="page-content">
-            </div>
 
+                <div class="terminal-container">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                        </div>
+                        <span class="terminal-title">CONSOLE_LOG</span>
+                    </div>
+                    <div class="terminal-body" id="terminal-content">
+                        <div class="terminal-cursor">_</div>
+                    </div>
+                </div>
 
-        <div id="page-more" class="page-content">
+            </div> </div> <div id="page-about" class="page-content">
+            </div><div id="page-more" class="page-content">
             <div class="sao-panel main-post visible">
-                <div class="user-title" style="width: fit-content; margin-bottom: 30px; color: var(--intp-accent);">ROBOTICS ACHIEVEMENTS</div>
+                <div class="user-title" style="width: fit-content; margin-bottom: 30px; color: var(--intp-accent);">競賽經驗</div>
                 
                 <div class="experience-list" style="display: flex; flex-direction: column; gap: 20px;">
+                    
                     <div class="exp-item" style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid var(--frc-red); border-radius: 15px; padding: 20px;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span style="font-family: 'Orbitron'; font-weight: 700;">FRC Team</span>
-                            <span style="font-size: 12px; opacity: 0.6;">2024 - Present</span>
+                            <span style="font-family: 'Orbitron'; font-weight: 700;">FIRST Robotic Competition (FRC)</span>
+                            <span style="font-size: 12px; opacity: 0.6;">2024 - 2026</span>
                         </div>
-                        <div style="font-size: 14px; color: var(--intp-main); font-weight: 600; margin-bottom: 10px;">Lead Programmer</div>
-                        <p style="margin: 0; font-size: 13px; opacity: 0.8; line-height: 1.6;">控制演算法編寫、感測器數據融合與視覺追蹤整合。</p>
+                        <div style="font-size: 14px; color: var(--intp-main); font-weight: 600; margin-bottom: 10px;">Programmer、PR</div>
+                        <p style="margin: 0; font-size: 13px; opacity: 0.8; line-height: 1.6;">雜食性動物，寫點程式，做一些小專題跟寫BP和EN</p>
+                        
+                        <div class="card-badge-container">
+                            <span class="award-badge frc-theme">Rising All-Star Award // ARCHIMEDES</span> 
+                            <span class="award-badge frc-theme">Rising All-Star Award // JOHNSON</span> 
+                            <span class="award-badge frc-theme">Judges' Award // CODE</span> 
+                            <span class="award-badge frc-theme">Quality Award、Regional Finalists //NTWC</span> 
+                            <span class="award-badge frc-theme">Regional Engineering Inspiration Award、Regional Finalists //TUIS2</span> 
+                            <span class="award-badge frc-theme">Team Sustainability Award //TUIS4</span> 
+                        </div>
                     </div>
 
                     <div class="exp-item" style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid var(--ftc-orange); border-radius: 15px; padding: 20px;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span style="font-family: 'Orbitron'; font-weight: 700;">FTC Team</span>
-                            <span style="font-size: 12px; opacity: 0.6;">2025 - Present</span>
+                            <span style="font-family: 'Orbitron'; font-weight: 700;">FIRST Tech challenge (FTC)</span>
+                            <span style="font-size: 12px; opacity: 0.6;">2025 - 2026</span>
                         </div>
-                        <div style="font-size: 14px; color: var(--intp-main); font-weight: 600; margin-bottom: 10px;">Mechanism Designer</div>
-                        <p style="margin: 0; font-size: 13px; opacity: 0.8; line-height: 1.6;">進料機構設計、三維 CAD 建模與結構應力分析。</p>
+                        <div style="font-size: 14px; color: var(--intp-main); font-weight: 600; margin-bottom: 10px;">Lead - Programmer</div>
+                        <p style="margin: 0 0 15px 0; font-size: 13px; opacity: 0.8; line-height: 1.6;">第一年創隊硬扛，超少人隊伍，也是雜食性動物啥都做</p>
+                        
+                        <div class="card-badge-container">
+                            <span class="award-badge ftc-theme">Connect Award 2nd Place + Qualifications Ranking 11/36 // TWCMP</span>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div> </section> 
-        
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <span class="m-label">LOGIC_TYPE</span>
-                <span class="m-value">INTP-T</span>
-            </div>
-            <div class="metric-card">
-                <span class="m-label">NETWORK</span>
-                <span class="m-value">STABLE</span>
-            </div>
-            <div class="metric-card">
-                <span class="m-label">UPTIME</span>
-                <span id="uptime-hours" class="m-value">Loading...</span>
-            </div>
-        </div>
 
-        <div class="terminal-container">
-            <div class="terminal-header">
-                <div class="terminal-dots">
-                    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    <div class="exp-item" style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid #00f2fe; border-radius: 15px; padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-family: 'Orbitron'; font-weight: 700;">新北市圓夢D-Maker計畫</span>
+                            <span style="font-size: 12px; opacity: 0.6;">2025、2026</span>
+                        </div>
+                        <div style="font-size: 14px; color: var(--intp-main); font-weight: 600; margin-bottom: 10px;">程式長、副隊長</div>
+                        <p style="margin: 0 0 15px 0; font-size: 13px; opacity: 0.8; line-height: 1.6;">第二屆-一日女力科技營隊、第三屆-AI特效輔具</p>
+                        
+                        <div class="card-badge-container">
+                            <span class="award-badge cyber-theme">第二屆 優選</span>
+                            <span class="award-badge cyber-theme">第三屆 優選</span>
+                        </div>
+                    </div>
+
+                    <div class="exp-item" style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid #a855f7; border-radius: 15px; padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-family: 'Orbitron'; font-weight: 700;">遠哲盃三分鐘英語科學創新挑戰賽</span>
+                            <span style="font-size: 12px; opacity: 0.6;">2024</span>
+                        </div>
+                        <div style="font-size: 14px; color: var(--intp-main); font-weight: 600; margin-bottom: 10px;">機器製作、報告</div>
+                        <p style="margin: 0 0 15px 0; font-size: 13px; opacity: 0.8; line-height: 1.6;">智能果園：自動化落果撿拾機</p>
+                        
+                        <div class="card-badge-container">
+                            <span class="award-badge project-theme">第二屆:高中職團體組佳作</span>
+                        </div>
+                    </div>
+                </div> </div> </div></section>
+
+        <div id="page-special" class="page-content">
+            <div class="sao-panel main-post visible">
+                <div class="user-title" style="width: fit-content; margin-bottom: 30px; color: #00ffcc;">特殊經驗 / 研習培訓</div>
+                
+                <div class="experience-list" style="display: flex; flex-direction: column; gap: 20px;">
+                    
+                    <div class="exp-item" style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid #ff007f; border-radius: 15px; padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 15px; color: #fff; letter-spacing: 1px;">INTERNATIONAL EXCHANGE & INVITATIONS</span>
+                            <span style="font-size: 12px; opacity: 0.6;">2024 - 2026</span>
+                        </div>
+                        <div style="font-size: 14px; color: #ff66b2; font-weight: 600; margin-bottom: 12px;">國際合作 // 受邀專案</div>
+                        <ul style="margin: 0 0 15px 0; padding-left: 20px; font-size: 13px; opacity: 0.8; line-height: 1.8; color: #fff;">
+                            <li>以色列 FRC 團隊編寫 FIRST Digital Guidebook 計畫</li>
+                            <li>參加台北美國學校研討會</li>
+                            <li>Girls in FIRST 貼文製作</li>
+                        </ul>
+                        <div class="card-badge-container">
+                            <span class="award-badge international-theme">🌐 Global Collaboration</span>
+                            <span class="award-badge international-theme">✨ Women in STEM</span>
+                            <span class="award-badge international-theme">🤖 FIRST Community</span>
+                        </div>
+                    </div>
+
+                    <div class="exp-item" style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid #fbbf24; border-radius: 15px; padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 15px; color: #fff; letter-spacing: 1px;">ENTERPRISE LINKAGE & DELEGATE</span>
+                            <span style="font-size: 12px; opacity: 0.6;">2024 - 2026</span>
+                        </div>
+                        <div style="font-size: 14px; color: #fcd34d; font-weight: 600; margin-bottom: 12px;">企業鏈結 // 產業代表</div>
+                        <ul style="margin: 0 0 15px 0; padding-left: 20px; font-size: 13px; opacity: 0.8; line-height: 1.8; color: #fff;">
+                            <li>AMD 企業參訪</li>
+                            <li>合普公司企業合作</li>
+                        </ul>
+                        <div class="card-badge-container">
+                            <span class="award-badge enterprise-theme">🤝 Industry Representative</span>
+                            <span class="award-badge enterprise-theme">⚙️ Corporate Relations</span>
+                        </div>
+                    </div>
+
+                    <div class="exp-item" style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid #10b981; border-radius: 15px; padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 15px; color: #fff; letter-spacing: 1px;">STEAM EDUCATION & OUTREACH</span>
+                            <span style="font-size: 12px; opacity: 0.6;">2025 - 2026</span>
+                        </div>
+                        <div style="font-size: 14px; color: #34d399; font-weight: 600; margin-bottom: 12px;">社會推廣 // 賽事服務 // 專業裁判</div>
+                        <ul style="margin: 0 0 15px 0; padding-left: 20px; font-size: 13px; opacity: 0.8; line-height: 1.8; color: #fff;">
+                            <li>首都獅子會國中 STEAM 教育</li>
+                            <li>科展工作坊 工作人員</li>
+                            <li>2025 新北市新生盃 裁判</li>
+                        </ul>
+                        <div class="card-badge-container">
+                            <span class="award-badge steam-theme">💡 STEAM Outreach</span>
+                            <span class="award-badge steam-theme">⚖️ Official Referee</span>
+                            <span class="award-badge steam-theme">🛠️ Workshop Staff</span>
+                        </div>
+                    </div>
+
+                    <div class="exp-item" style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid #00e5ff; border-radius: 15px; padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 15px; color: #fff; letter-spacing: 1px;">ADVANCED TECH EXPOSITIONS & SUMMITS</span>
+                            <span style="font-size: 12px; opacity: 0.6;">2025 - 2026</span>
+                        </div>
+                        <div style="font-size: 14px; color: #22d3ee; font-weight: 600; margin-bottom: 12px;">學術研習 // 科技大展 // 頂尖年會</div>
+                        <ul style="margin: 0 0 15px 0; padding-left: 20px; font-size: 13px; opacity: 0.8; line-height: 1.8; color: #fff;">
+                            <li>新北市與大學共創學習課程－陽明交大生醫科技</li>
+                            <li>2025 台灣醫療科技展</li>
+                            <li>2026 SITCON 學生計算機年會</li>
+                            <li>2026 COMPUTEX</li>
+                        </ul>
+                        <div class="card-badge-container">
+                            <span class="award-badge advanced-theme">🧬 Bio-Medical Tech</span>
+                            <span class="award-badge advanced-theme">💻 SITCON 2026</span>
+                            <span class="award-badge advanced-theme">⚡ COMPUTEX 2026</span>
+                        </div>
+                    </div>
+
                 </div>
-                <span class="terminal-title">CONSOLE_LOG</span>
-            </div>
-            <div class="terminal-body" id="terminal-content">
-    <div class="terminal-cursor">_</div>
-</div>
-</section>
+            </div> 
+        </div> 
+
 <aside class="sidebar">
     <div class="sao-panel">
         <div class="system-status">About Me</div>

@@ -163,16 +163,16 @@ body {
 }
 /* --- 下拉選單外層核心 --- */
 .dropdown-trigger {
-    position: relative; /* 讓子選單能相對定位 */
+    position: relative;
 }
 
 /* 下拉選單本體 */
 .dropdown-menu {
     position: absolute;
-    top: 100%; /* 從母按鈕下方邊界展開 */
+    top: 100%;
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    background: rgba(15, 23, 42, 0.85); /* 深色透明基底 */
+    background: rgba(15, 23, 42, 0.85);
     backdrop-filter: var(--intp-blur);
     border: 1px solid var(--intp-glass-border);
     border-radius: 12px;
@@ -181,7 +181,6 @@ body {
     width: 140px;
     box-shadow: var(--intp-shadow);
     
-    /* 預設隱藏並帶有淡入效果 */
     display: none;
     opacity: 0;
     transition: opacity 0.3s var(--jelly-curve), transform 0.3s var(--jelly-curve);
@@ -206,7 +205,7 @@ body {
     opacity: 1 !important;
     color: var(--intp-main) !important;
     background: rgba(255, 255, 255, 0.05) !important;
-    transform: none !important; /* 取消原 li 的上浮動效 */
+    transform: none !important; 
 }
 
 /* 滑鼠移入或點擊時，顯示下拉選單 */
@@ -222,4 +221,133 @@ body {
 }
 .dropdown-trigger i.fa-chevron-down {
     transition: transform 0.3s ease;
+}
+/* --- 分頁顯示與隱藏核心控制 --- */
+.page-content {
+    display: none;
+    width: 100%;
+}
+
+.page-content.active {
+    display: block;
+}
+
+.card-badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.award-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 50px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+/* FRC紅色系標籤 */
+.award-badge.frc-theme {
+    color: #f87171; 
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+}
+.award-badge.frc-theme:hover {
+    background: rgba(239, 68, 68, 0.18);
+    border-color: rgba(239, 68, 68, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+/* FTC橘色系標籤 */
+.award-badge.ftc-theme {
+    color: #fb923c;
+    background: rgba(249, 115, 22, 0.08);
+    border: 1px solid rgba(249, 115, 22, 0.25);
+}
+.award-badge.ftc-theme:hover {
+    background: rgba(249, 115, 22, 0.18);
+    border-color: rgba(249, 115, 22, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
+}
+/*  圓夢計畫青綠/電子藍色系標籤 */
+.award-badge.cyber-theme {
+    color: #00f2fe;
+    background: rgba(0, 242, 254, 0.08);
+    border: 1px solid rgba(0, 242, 254, 0.25);
+}
+.award-badge.cyber-theme:hover {
+    background: rgba(0, 242, 254, 0.18);
+    border-color: rgba(0, 242, 254, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 242, 254, 0.3);
+}
+/* 遠哲科幻紫霓虹標籤 */
+.award-badge.project-theme {
+    color: #c084fc;
+    background: rgba(168, 85, 247, 0.08);
+    border: 1px solid rgba(168, 85, 247, 0.25);
+}
+.award-badge.project-theme:hover {
+    background: rgba(168, 85, 247, 0.18);
+    border-color: rgba(168, 85, 247, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+}
+/*  國際交流（桃紅微光） */
+.award-badge.international-theme {
+    color: #ff66b2;
+    background: rgba(255, 0, 127, 0.06);
+    border: 1px solid rgba(255, 0, 127, 0.25);
+}
+.award-badge.international-theme:hover {
+    background: rgba(255, 0, 127, 0.15);
+    border-color: rgba(255, 0, 127, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 0, 127, 0.35);
+}
+
+/*  企業合作（金黃微光） */
+.award-badge.enterprise-theme {
+    color: #fcd34d;
+    background: rgba(251, 191, 36, 0.06);
+    border: 1px solid rgba(251, 191, 36, 0.25);
+}
+.award-badge.enterprise-theme:hover {
+    background: rgba(251, 191, 36, 0.15);
+    border-color: rgba(251, 191, 36, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.35);
+}
+
+/* STEAM 教育（翠綠微光） */
+.award-badge.steam-theme {
+    color: #34d399;
+    background: rgba(16, 185, 129, 0.06);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+.award-badge.steam-theme:hover {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+}
+
+/* 前沿科技（極光藍微光） */
+.award-badge.advanced-theme {
+    color: #22d3ee;
+    background: rgba(0, 229, 255, 0.06);
+    border: 1px solid rgba(0, 229, 255, 0.25);
+}
+.award-badge.advanced-theme:hover {
+    background: rgba(0, 229, 255, 0.15);
+    border-color: rgba(0, 229, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 229, 255, 0.35);
 }
