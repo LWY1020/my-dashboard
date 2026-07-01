@@ -422,34 +422,64 @@ body {
         cursor: pointer !important;                    /* 強制讓 iPhone 承認它是可以點擊的按鈕 */
         -webkit-tap-highlight-color: transparent !important; /* 拔掉 iPhone 點擊時內建的醜灰色陰影 */
     }
-
-    nav ul.dropdown-menu, 
-    nav ul.submenu, 
+.dropdown-trigger ul, 
     .dropdown-menu, 
-    .submenu,
-    [class*="sub-nav"] {
-        display: flex !important;
-        flex-direction: column !important;       /* 🌟 絕對關鍵：由橫排改為「垂直單列」 */
-        position: absolute !important;           /* 懸浮定位 */
-        top: 50px !important;                    /* 浮在導覽列正下方 */
-        right: 4% !important;                    /* 貼齊右側邊界 */
-        gap: 6px !important;                     /* 選項的上下間距 */
-        background: rgba(16, 20, 38, 0.98) !important; /* 科技感深色背景 */
-        backdrop-filter: blur(10px) !important;
-        border: 1px solid rgba(96, 165, 250, 0.3) !important; /* 藍色細邊框 */
+    .submenu, 
+    [class*="sub-nav"], 
+    #nav-more-trigger + ul {
+        display: none !important;                /* 預設隱藏，由 JS 控制 */
+        position: absolute !important;           
+        top: 60px !important;                    /* 乖乖浮在 header 正下方 */
+        right: 4% !important;                    /* 對齊手機畫面右側留白 */
+        left: auto !important;                   /* 清除可能干擾的左側定位 */
+        
+        /* 🌟 強制掰成「垂直單列排版」 */
+        flex-direction: column !important;       
+        flex-wrap: nowrap !important;
+        gap: 8px !important;                     /* 選項與選項的上下間距 */
+        
+        /* 超精緻炫酷毛玻璃深色底 */
+        background: rgba(16, 20, 38, 0.98) !important; 
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border: 1px solid rgba(96, 165, 250, 0.4) !important; /* 藍色細邊框 */
         border-radius: 8px !important;
-        padding: 8px !important;
-        width: 120px !important;                 /* 限制下拉選單寬度 */
-        z-index: 9999 !important;                /* 確保浮在最上層 */
+        padding: 10px 14px !important;           /* 給內部選項舒適的襯墊空間 */
+        
+        /* 寬度與高圖層防禦 */
+        width: 130px !important;                 /* 固定寬度，字絕對不會被擠爛 */
+        min-width: 120px !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
+        z-index: 999999 !important;              /* 史上最高圖層，絕對不准被底下的卡片遮住！ */
     }
 
-    /* 確保下拉選單裡面的按鈕或文字不會又橫著長 */
-    .dropdown-menu li, .submenu li,
-    .dropdown-menu a, .submenu a {
+    /* 🌟 當 JS 注入狀態，或者點擊激發時，強制改用 flex 垂直展現 */
+    .dropdown-menu.show, .dropdown-menu.active,
+    .submenu.show, .submenu.active,
+    .show, .active,
+    [style*="display: flex"] {
+        display: flex !important;                
+    }
+
+    /* 確保下拉選單裡面的 <li> 和 <a> 徹底解放，變成垂直區塊 */
+    .dropdown-trigger ul li,
+    .dropdown-menu li, 
+    .submenu li,
+    .dropdown-menu a,
+    .submenu a {
         display: block !important;
         width: 100% !important;
         text-align: center !important;           /* 文字置中 */
-        padding: 6px 0 !important;
+        white-space: nowrap !important;          /* 絕對不准斷行 */
+        font-size: 14px !important;              /* 稍微放大，方便粗手指點擊 */
+        padding: 8px 0 !important;               /* 增加上下點擊熱區 */
         margin: 0 !important;
+        background: transparent !important;      /* 拔掉原本的膠囊背景色 */
+        border-radius: 4px !important;
+    }
+
+    /* 滑鼠懸停或點擊時的微光特效 */
+    .dropdown-menu a:active, .submenu a:active {
+        background: rgba(96, 165, 250, 0.2) !important;
     }
 }
