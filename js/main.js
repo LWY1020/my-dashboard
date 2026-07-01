@@ -138,48 +138,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const pages = document.querySelectorAll('.page-content');
     const sidebar = document.querySelector('.sidebar');
     const pageIds = ['page-home', 'page-about', 'page-more', 'page-special'];
-// === 2. 🎯 精準定位版：只抓「更多資訊」的正下方子選單 ===
-    const moreBtn = document.getElementById('nav-more-trigger');
+// === 2. 🎯 終極無情版：專治 iPhone 點不到下拉選單的強制腳本 ===
+    const moreBtn = document.getElementById('nav-more-trigger') || 
+                    document.querySelector('.dropdown-trigger');
+    
+    const dropdownMenu = document.querySelector('.submenu') || 
+                         document.querySelector('.dropdown-menu') || 
+                         document.querySelector('.more-dropdown');
 
-    if (moreBtn) {
-        // 直接找它緊鄰的那個下一個標籤 (通常就是 <ul>)
-        const dropdownMenu = moreBtn.querySelector('ul') || moreBtn.nextElementSibling;
+    if (moreBtn && dropdownMenu) {
+        // 先用暴力流確保它的基本浮動樣式不受舊 CSS 綁架
+        dropdownMenu.style.position = 'absolute';
+        dropdownMenu.style.zIndex = '99999';
 
-        if (dropdownMenu) {
-            function toggleDropdown(e) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                // 檢查 display 狀態
-                const currentDisplay = window.getComputedStyle(dropdownMenu).display;
-                
-                if (currentDisplay === 'none') {
-                    // 暴力強制顯示並垂直排版
-                    dropdownMenu.style.setProperty('display', 'flex', 'important');
-                    dropdownMenu.style.setProperty('flex-direction', 'column', 'important');
-                    dropdownMenu.style.setProperty('position', 'absolute', 'important');
-                    dropdownMenu.style.setProperty('top', '50px', 'important'); // 距離頂部高度
-                    dropdownMenu.style.setProperty('right', '10px', 'important');
-                    dropdownMenu.style.setProperty('z-index', '999999', 'important');
-                    
-                    // 強制裡面的項目全部變直式
-                    const items = dropdownMenu.querySelectorAll('li, a');
-                    items.forEach(item => {
-                        item.style.setProperty('display', 'block', 'important');
-                        item.style.setProperty('width', '100%', 'important');
-                    });
-                    console.log("iPhone: 選單已強制展開");
-                } else {
-                    dropdownMenu.style.setProperty('display', 'none', 'important');
-                    console.log("iPhone: 選單已隱藏");
-                }
+        function toggleDropdown(e) {
+            e.preventDefault();  
+            e.stopPropagation(); 
+            
+            // 🌟 核心：直接用 JS 判定當前的 display 狀態，強制進行硬切換！
+            if (dropdownMenu.style.display === 'flex') {
+                dropdownMenu.style.setProperty('display', 'none', 'important');
+                console.log("iPhone: 強制隱藏選單");
+            } else {
+                dropdownMenu.style.setProperty('display', 'flex', 'important');
+                console.log("iPhone: 強制暴力顯示選單！");
             }
-            // 綁定觸控
-            moreBtn.addEventListener('click', toggleDropdown);
-            moreBtn.addEventListener('touchstart', toggleDropdown, { passive: false });
         }
-    }
 
+        // click 與觸控事件雙管齊下
+        moreBtn.addEventListener('click', toggleDropdown);
+        moreBtn.addEventListener('touchstart', toggleDropdown, { passive: false });
+
+        // 點擊畫面其他空白處時，強制收起來
+        document.addEventListener('click', function(e) {
+            if (!moreBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.style.setProperty('display', 'none', 'important');
+            }
+        });
+    }
+    
     function resetActiveState() {
         pages.forEach(p => p.classList.remove('active'));
         navLinks.forEach(l => {

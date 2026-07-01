@@ -374,6 +374,7 @@ body {
         white-space: nowrap !important;
         margin: 0 !important;
     }
+
     nav, .nav-links, .nav-menu, header ul, nav ul {
         display: flex !important;
         flex-direction: row !important;         /* 強制大導覽列橫排 */
@@ -385,6 +386,7 @@ body {
         padding: 0 !important;
         width: auto !important;
     }
+
     nav li, .nav-links li, .nav-item,
     nav a, .nav-links a, header a {
         display: inline-block !important;
@@ -393,6 +395,7 @@ body {
         padding: 4px 6px !important;
         width: auto !important;
     }
+
     main, .container, .dashboard, .dashboard-layout, .main-content, section {
         width: 94% !important;                  /* 🌟 關鍵：將原本空曠的兩側留白縮小，讓版面佔滿 94% */
         max-width: 100% !important;
@@ -400,11 +403,13 @@ body {
         padding: 10px !important;               /* 縮小內襯，留更多空間給內容 */
         box-sizing: border-box !important;      /* 防止 padding 撐破外殼 */
     }
+
     .card, .panel, .console-container, [class*="box"] {
         width: 100% !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
     }
+
     #nav-more-trigger, 
     .nav-item, 
     nav li, 
@@ -412,97 +417,64 @@ body {
         cursor: pointer !important;                    /* 強制讓 iPhone 承認它是可以點擊的按鈕 */
         -webkit-tap-highlight-color: transparent !important; /* 拔掉 iPhone 點擊時內建的醜灰色陰影 */
     }
-#nav-more-trigger ul,
-    .dropdown-trigger ul,
-    .dropdown-menu,
-    .submenu {
-        display: none !important;                /* 預設先隱藏，等點擊時再由 JS 控制出現 */
+.dropdown-trigger ul, 
+    .dropdown-menu, 
+    .submenu, 
+    [class*="sub-nav"], 
+    #nav-more-trigger + ul {
+        display: none !important;                /* 預設隱藏，由 JS 控制 */
         position: absolute !important;           
-        top: 50px !important;                    /* 乖乖懸浮在 header 正下方 */
-        right: 4% !important;                    /* 完美對齊手機右側邊界 */
-        left: auto !important;                   
+        top: 60px !important;                    /* 乖乖浮在 header 正下方 */
+        right: 4% !important;                    /* 對齊手機畫面右側留白 */
+        left: auto !important;                   /* 清除可能干擾的左側定位 */
         
-        /* 🌟 核心破魔咒：強制由橫排 (row) 改成直排 (column) */
+        /* 🌟 強制掰成「垂直單列排版」 */
         flex-direction: column !important;       
         flex-wrap: nowrap !important;
-        gap: 4px !important;                     /* 調整選項跟選項之間的上下間距 */
+        gap: 8px !important;                     /* 選項與選項的上下間距 */
         
-        /* 超美科技感深色毛玻璃背景 */
+        /* 超精緻炫酷毛玻璃深色底 */
         background: rgba(16, 20, 38, 0.98) !important; 
-        backdrop-filter: blur(10px) !important;
-        -webkit-backdrop-filter: blur(10px) !important;
-        border: 1px solid rgba(96, 165, 250, 0.3) !important; /* 科技藍細邊框 */
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border: 1px solid rgba(96, 165, 250, 0.4) !important; /* 藍色細邊框 */
         border-radius: 8px !important;
-        padding: 8px !important;
+        padding: 10px 14px !important;           /* 給內部選項舒適的襯墊空間 */
         
-        width: 120px !important;                 /* 固定選單寬度，字才不會被壓扁 */
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
-        z-index: 999999 !important;              /* 最高的圖層，絕對不被下方的卡片蓋住 */
+        /* 寬度與高圖層防禦 */
+        width: 130px !important;                 /* 固定寬度，字絕對不會被擠爛 */
+        min-width: 120px !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
+        z-index: 999999 !important;              /* 史上最高圖層，絕對不准被底下的卡片遮住！ */
     }
 
-    /* 🌟 當點擊打開（JS 注入狀態）時，強制以 flex 垂直排列呈現 */
-    #nav-more-trigger ul.show, #nav-more-trigger ul.active,
-    .dropdown-menu.show, .submenu.show,
+    /* 🌟 當 JS 注入狀態，或者點擊激發時，強制改用 flex 垂直展現 */
+    .dropdown-menu.show, .dropdown-menu.active,
+    .submenu.show, .submenu.active,
     .show, .active,
     [style*="display: flex"] {
         display: flex !important;                
     }
 
-    /* 解放裡面的 <li> 膠囊，讓它們恢復成整行的直式按鈕 */
-    #nav-more-trigger ul li,
-    .dropdown-menu li,
-    .submenu li {
+    /* 確保下拉選單裡面的 <li> 和 <a> 徹底解放，變成垂直區塊 */
+    .dropdown-trigger ul li,
+    .dropdown-menu li, 
+    .submenu li,
+    .dropdown-menu a,
+    .submenu a {
         display: block !important;
         width: 100% !important;
+        text-align: center !important;           /* 文字置中 */
+        white-space: nowrap !important;          /* 絕對不准斷行 */
+        font-size: 14px !important;              /* 稍微放大，方便粗手指點擊 */
+        padding: 8px 0 !important;               /* 增加上下點擊熱區 */
         margin: 0 !important;
-        padding: 0 !important;
-        background: transparent !important;      /* 拔掉原本橫向黏在一起的底色 */
-    }/* ===================================================
-   🌟 下拉選單「膠囊」視覺優化
-   =================================================== */
-
-/* 調整下拉選單內的連結項目 */
-.dropdown-menu a,
-.submenu a,
-.dropdown-trigger ul a {
-    display: block !important;
-    padding: 10px 15px !important;
-    margin: 4px 0 !important;
-    text-decoration: none !important;
-    font-size: 14px !important;
-    color: #a0c4ff !important;            /* 設定文字為淡科技藍 */
-    background: rgba(30, 41, 59, 0.6) !important; /* 設定背景為深灰藍底 */
-    border: 1px solid rgba(96, 165, 250, 0.3) !important; /* 邊框 */
-    border-radius: 20px !important;       /* 讓它變成膠囊形狀 */
-    text-align: center !important;
-    transition: all 0.3s ease !important;
-}
-
-/* 滑鼠懸停或點擊時的互動效果 */
-.dropdown-menu a:hover,
-.dropdown-menu a:active,
-.submenu a:hover,
-.submenu a:active {
-    background: rgba(96, 165, 250, 0.2) !important;
-    color: #ffffff !important;            /* 互動時文字變白 */
-    border-color: rgba(96, 165, 250, 0.6) !important;
-}
-}
-/* --- 在 @media (max-width: 768px) { ... } 的括號之外加入 --- */
-@media (min-width: 769px) {
-    header, .navbar, .header-container {
-        display: flex !important;
-        flex-direction: row !important; /* 電腦版強制橫排 */
-        width: 100% !important;
+        background: transparent !important;      /* 拔掉原本的膠囊背景色 */
+        border-radius: 4px !important;
     }
-    
-    /* 確保電腦版選單不會被手機版的邏輯影響 */
-    .dropdown-menu, .submenu {
-        display: none !important; /* 電腦版預設不顯示，除非 hover */
-    }
-    
-    .nav-item:hover .dropdown-menu,
-    .nav-item:hover .submenu {
-        display: block !important; /* 電腦版 hover 時才顯示 */
+
+    /* 滑鼠懸停或點擊時的微光特效 */
+    .dropdown-menu a:active, .submenu a:active {
+        background: rgba(96, 165, 250, 0.2) !important;
     }
 }
