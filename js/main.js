@@ -139,6 +139,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.querySelector('.sidebar');
     const pageIds = ['page-home', 'page-about', 'page-more', 'page-special'];
 
+    // === 2. 🎯 緊接著塞入：專治 iPhone 點不到下拉選單的防禦腳本 ===
+    const moreBtn = document.getElementById('nav-more-trigger') || 
+                    document.querySelector('.dropdown-trigger');
+    
+    // 自動抓取你的更多資訊下拉選單（包含常見的 submenu 或 dropdown-menu 類名）
+    const dropdownMenu = document.querySelector('.submenu') || 
+                         document.querySelector('.dropdown-menu') || 
+                         document.querySelector('.more-dropdown');
+
+    if (moreBtn && dropdownMenu) {
+        function toggleDropdown(e) {
+            e.preventDefault();  // 防止 iPhone 瀏覽器誤觸跳頁
+            e.stopPropagation(); // 阻止點擊事件干擾到其他元素
+            
+            // 同時切換 show 跟 active 類名，確保迎合你的 CSS 設定
+            dropdownMenu.classList.toggle('show');
+            dropdownMenu.classList.toggle('active');
+            console.log("iPhone 成功強制觸發下拉選單！");
+        }
+
+        // 核心密技： click 與觸控事件雙管齊下，誰先有反應就聽誰的
+        moreBtn.addEventListener('click', toggleDropdown);
+        moreBtn.addEventListener('touchstart', toggleDropdown, { passive: false });
+
+        // 貼心加碼：點擊畫面其他空白處時，自動把下拉選單收起來
+        document.addEventListener('click', function(e) {
+            if (!moreBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.remove('show');
+                dropdownMenu.classList.remove('active');
+            }
+        });
+    }
     function resetActiveState() {
         pages.forEach(p => p.classList.remove('active'));
         navLinks.forEach(l => {
