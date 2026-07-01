@@ -457,25 +457,52 @@ body {
         margin: 0 !important;
         padding: 0 !important;
         background: transparent !important;      /* 拔掉原本橫向黏在一起的底色 */
-    }
+    }/* ===================================================
+   🌟 下拉選單「膠囊」視覺優化
+   =================================================== */
 
-    /* 確保裡面的文字/超連結乖乖聽話、置中且一整行不折行 */
-    #nav-more-trigger ul a,
-    .dropdown-menu a,
-    .submenu a {
-        display: block !important;
+/* 調整下拉選單內的連結項目 */
+.dropdown-menu a,
+.submenu a,
+.dropdown-trigger ul a {
+    display: block !important;
+    padding: 10px 15px !important;
+    margin: 4px 0 !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+    color: #a0c4ff !important;            /* 設定文字為淡科技藍 */
+    background: rgba(30, 41, 59, 0.6) !important; /* 設定背景為深灰藍底 */
+    border: 1px solid rgba(96, 165, 250, 0.3) !important; /* 邊框 */
+    border-radius: 20px !important;       /* 讓它變成膠囊形狀 */
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+}
+
+/* 滑鼠懸停或點擊時的互動效果 */
+.dropdown-menu a:hover,
+.dropdown-menu a:active,
+.submenu a:hover,
+.submenu a:active {
+    background: rgba(96, 165, 250, 0.2) !important;
+    color: #ffffff !important;            /* 互動時文字變白 */
+    border-color: rgba(96, 165, 250, 0.6) !important;
+}
+}
+/* --- 在 @media (max-width: 768px) { ... } 的括號之外加入 --- */
+@media (min-width: 769px) {
+    header, .navbar, .header-container {
+        display: flex !important;
+        flex-direction: row !important; /* 電腦版強制橫排 */
         width: 100% !important;
-        text-align: center !important;           /* 文字居中 */
-        white-space: nowrap !important;          /* 絕對不准字體變直、不准折行 */
-        font-size: 13px !important;              
-        padding: 8px 0 !important;               /* 增加手指點擊的上下熱區空間 */
-        color: #ffffff !important;
-        border-radius: 4px !important;
     }
-
-    /* 點擊或手指觸碰時的精緻高亮回饋 */
-    #nav-more-trigger ul a:active,
-    .dropdown-menu a:active {
-        background: rgba(96, 165, 250, 0.2) !important;
+    
+    /* 確保電腦版選單不會被手機版的邏輯影響 */
+    .dropdown-menu, .submenu {
+        display: none !important; /* 電腦版預設不顯示，除非 hover */
+    }
+    
+    .nav-item:hover .dropdown-menu,
+    .nav-item:hover .submenu {
+        display: block !important; /* 電腦版 hover 時才顯示 */
     }
 }
