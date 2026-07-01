@@ -350,11 +350,7 @@ body {
     border-color: rgba(0, 229, 255, 0.5);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 229, 255, 0.35);
-}
-/* ===================================================
-   📱 最終完美版：復刻電腦版選單 + 面板全螢幕填滿
-   =================================================== */
-@media (max-width: 768px) {
+}@media (max-width: 768px) {
     
     /* 1. 🛡️ 全域防禦依舊保留：防止任何橫向溢出 */
     html, body {
@@ -365,7 +361,6 @@ body {
         padding: 0 !important;
     }
 
-    /* 2. 🗺️ 頂部導覽列：復刻電腦版，左邊標題、右邊選單 */
     header, .navbar, .header-container, #header {
         display: flex !important;
         flex-direction: row !important;         /* 🌟 關鍵：恢復和電腦版一樣的橫排 */
@@ -377,14 +372,12 @@ body {
         box-sizing: border-box !important;
     }
 
-    /* 調整 LWY Dashboard 標題字體，避免在手機上太大 */
     header h1, .logo, .brand {
         font-size: clamp(14px, 4vw, 18px) !important; /* 智慧型縮小字體 */
         white-space: nowrap !important;
         margin: 0 !important;
     }
 
-    /* 3. 🧭 選單按鈕群：強制絕對橫排、縮小間距 */
     nav, .nav-links, .nav-menu, header ul, nav ul {
         display: flex !important;
         flex-direction: row !important;         /* 強制橫排 */
@@ -397,7 +390,6 @@ body {
         width: auto !important;
     }
 
-    /* 徹底解除文字變直的魔咒 */
     nav li, .nav-links li, .nav-item,
     nav a, .nav-links a, header a {
         display: inline-block !important;
@@ -407,7 +399,6 @@ body {
         width: auto !important;
     }
 
-    /* 4. 📦 版面填滿：讓下方的 Link Start 科技感大面板撐滿手機螢幕 */
     main, .container, .dashboard, .dashboard-layout, .main-content, section {
         width: 94% !important;                  /* 🌟 關鍵：將原本空曠的兩側留白縮小，讓版面佔滿 94% */
         max-width: 100% !important;
@@ -416,10 +407,18 @@ body {
         box-sizing: border-box !important;      /* 防止 padding 撐破外殼 */
     }
 
-    /* 確保裡面的子面板、Console 也能跟著滿版 */
     .card, .panel, .console-container, [class*="box"] {
         width: 100% !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
+    }
+
+    /* 🎯 補在最後面：專治 iPhone 點擊無效的大絕招 */
+    #nav-more-trigger, 
+    .nav-item, 
+    nav li, 
+    header i {
+        cursor: pointer !important;                    /* 強制讓 iPhone 承認它是可以點擊的按鈕 */
+        -webkit-tap-highlight-color: transparent !important; /* 拔掉 iPhone 點擊時內建的醜灰色陰影 */
     }
 }
