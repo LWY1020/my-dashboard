@@ -351,34 +351,49 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 229, 255, 0.35);
 }
-
+/* ===================================================
+   📱 終極手機版導覽列重置（強力轟炸版）
+   =================================================== */
 @media (max-width: 768px) {
     
-    header, .navbar, .header-container {
-        flex-direction: column !important;
-        height: auto !important;
-        padding: 15px 10px !important;
-        gap: 12px !important;
-    }
-
-    .logo, header h1, .brand {
-        text-align: center !important;
-        margin: 0 !important;
-    }
-
-    nav, .nav-links, .nav-menu {
+    /* 1. 讓最外層導覽列變上下兩層（上標題、下選單），並解開所有高度限制 */
+    header, .navbar, .header-container, #header {
         display: flex !important;
-        flex-direction: row !important;
+        flex-direction: column !important; /* 強制變上下排 */
+        height: auto !important;
+        min-height: unset !important;
+        padding: max(20px, env(safe-area-inset-top)) 10px 15px 10px !important; /* 避開iPhone狀態欄 */
+        align-items: center !important;
         justify-content: center !important;
-        flex-wrap: nowrap !important;
-        gap: 15px !important;
-        width: 100% !important;
-        padding: 0 !important;
+        position: relative !important; /* 防止被 absolute 定位鎖死 */
     }
 
-    nav a, .nav-links a, .nav-item {
-        white-space: nowrap !important;
-        font-size: 14px !important;
-        padding: 5px 8px !important;
+    /* 2. 強制選單容器橫向排列，解除寬度壓縮 */
+    nav, .nav-links, .nav-menu, header ul, nav ul {
+        display: flex !important;
+        flex-direction: row !important;     /* 絕對要橫排 */
+        flex-wrap: nowrap !important;       /* 絕對不准折行 */
+        justify-content: center !important; /* 置中 */
+        align-items: center !important;
+        width: 100% !important;             /* 撐滿手機寬度 */
+        max-width: 100% !important;
+        gap: 15px !important;               /* 控制按鈕左右間距 */
+        margin: 10px 0 0 0 !important;
+        padding: 0 !important;
+        position: static !important;        /* 解除電腦版可能有的絕對定位 */
+    }
+
+    /* 3. 針對所有的清單項目與連結（li, a, span）進行流氓級重置 */
+    nav li, .nav-links li, .nav-item,
+    nav a, .nav-links a, header a, 
+    #nav-more-trigger, #nav-more-trigger * {
+        display: inline-block !important;
+        width: auto !important;             /* 解除任何固定寬度（兇手通常是這個） */
+        min-width: unset !important;
+        max-width: unset !important;
+        white-space: nowrap !important;     /* 🌟 核心：強制文字一整行，絕對不准變直！ */
+        font-size: 14px !important;         /* 縮小字體適合手機 */
+        letter-spacing: 0 !important;
+        padding: 4px 6px !important;
     }
 }
