@@ -349,8 +349,9 @@ body {
     background: rgba(0, 229, 255, 0.15);
     border-color: rgba(0, 229, 255, 0.5);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 229, 255, 0.35);
-}@media (max-width: 768px) {
+    box-shadow: 0 4px 12px rgba(0, 229, 255, 0.35); 
+}
+@media (max-width: 768px) {
     
     /* 1. 🛡️ 全域防禦依舊保留：防止任何橫向溢出 */
     html, body {
@@ -420,5 +421,52 @@ body {
     header i {
         cursor: pointer !important;                    /* 強制讓 iPhone 承認它是可以點擊的按鈕 */
         -webkit-tap-highlight-color: transparent !important; /* 拔掉 iPhone 點擊時內建的醜灰色陰影 */
+    }
+
+    /* ===================================================
+       🌟 新增 1. 更多資訊：橫向膠囊改為「垂直式科技感下拉選單」
+       =================================================== */
+    /* 註：底下的選擇器已涵蓋常見名稱，請確保你 HTML 裡下拉選單的 class 有對上 */
+    .submenu, .dropdown-menu, [class*="sub-nav"], .more-dropdown {
+        position: absolute !important;
+        top: 55px !important;                    /* 讓選單乖乖浮在 header 下方 */
+        right: 4% !important;                    /* 完美對齊手機導覽列右側 */
+        display: flex !important;
+        flex-direction: column !important;       /* 🌟 強制由橫排改成「垂直單列排版」 */
+        gap: 6px !important;                     /* 選項之間的上下間距 */
+        background: rgba(16, 20, 38, 0.95) !important; /* 超美毛玻璃深色底 */
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(96, 165, 250, 0.3) !important; /* 科技藍細邊框 */
+        border-radius: 8px !important;
+        padding: 8px !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+        width: 130px !important;                 /* 固定下拉選單寬度，字才不會擠爛 */
+        z-index: 9999 !important;                /* 最高圖層，絕對不被下方內容遮擋 */
+    }
+
+    /* 下拉選單裡面的選項 */
+    .submenu a, .dropdown-menu li, .more-dropdown a {
+        width: 100% !important;
+        text-align: center !important;           /* 文字置中 */
+        padding: 6px 0 !important;
+        margin: 0 !important;
+        display: block !important;
+    }
+
+    /* ===================================================
+       🌟 新增 2. 框框對齊：消除寬度落差，強制 FRC 與特殊經驗完美切齊
+       =================================================== */
+    /* 同時綁定你的 FRC 區塊與特殊經驗區塊，強行統一內襯與寬度核心 */
+    .experience-card, .contest-card, .card, section .panel, [class*="-content"], [class*="box"] {
+        width: 100% !important;                  /* 撐滿主外殼的 94% 寬度 */
+        max-width: 100% !important;
+        box-sizing: border-box !important;      /* 防止內襯把寬度頂爆 */
+        
+        /* 統一內襯與外距，複製特殊經驗的精緻比例 */
+        padding: max(16px, 4vw) !important;      
+        margin-left: 0 !important;               
+        margin-right: 0 !important;
+        margin-bottom: 20px !important;          /* 每張卡片之間規律的上下間距 */
+        border-radius: 12px !important;          /* 圓角統一 */
     }
 }
