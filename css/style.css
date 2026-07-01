@@ -159,4 +159,67 @@ body {
     .user-info { flex-direction: column; text-align: center; }
     .user-meta { align-items: center; }
     .user-identity { width: 100%; justify-content: center; }
+    
+}
+/* --- 下拉選單外層核心 --- */
+.dropdown-trigger {
+    position: relative; /* 讓子選單能相對定位 */
+}
+
+/* 下拉選單本體 */
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* 從母按鈕下方邊界展開 */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: rgba(15, 23, 42, 0.85); /* 深色透明基底 */
+    backdrop-filter: var(--intp-blur);
+    border: 1px solid var(--intp-glass-border);
+    border-radius: 12px;
+    padding: 8px 0;
+    list-style: none;
+    width: 140px;
+    box-shadow: var(--intp-shadow);
+    
+    /* 預設隱藏並帶有淡入效果 */
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s var(--jelly-curve), transform 0.3s var(--jelly-curve);
+    z-index: 2000;
+}
+
+/* 子選項樣式 */
+.dropdown-menu li {
+    padding: 10px 18px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: white !important;
+    opacity: 0.8 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    text-align: center;
+    transition: all 0.2s ease !important;
+}
+
+/* 子選項 Hover 狀態 */
+.dropdown-menu li:hover {
+    opacity: 1 !important;
+    color: var(--intp-main) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    transform: none !important; /* 取消原 li 的上浮動效 */
+}
+
+/* 滑鼠移入或點擊時，顯示下拉選單 */
+.dropdown-trigger:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: translateX(-50%) translateY(5px);
+}
+
+/* 讓下拉選單箭頭有旋轉動效 */
+.dropdown-trigger:hover i.fa-chevron-down {
+    transform: rotate(180deg);
+}
+.dropdown-trigger i.fa-chevron-down {
+    transition: transform 0.3s ease;
 }

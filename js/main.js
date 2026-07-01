@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, 100);
 
+    // --- 3. 終端機模擬效果 ---
     const initTerminal = () => {
         const terminalBody = document.querySelector('.terminal-body');
         if (!terminalBody) return;
@@ -85,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     initTerminal();
 
+    // --- 4. FRC/FTC 經歷天數計算與進度條 ---
     const calculateDays = (startDateStr) => {
         const start = new Date(startDateStr);
         const now = new Date();
@@ -129,6 +131,56 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(update);
     }
 
+    // --- 5. 分頁與下拉選單切換邏輯 (新強化的功能) ---
+    const navLinks = document.querySelectorAll('.nav-links > li'); 
+    const subLinkExp = document.getElementById('sub-link-exp');  
+    const pages = document.querySelectorAll('.page-content');
+    const pageIds = ['page-home', 'page-about', 'page-more'];
+
+    function resetActiveState() {
+        pages.forEach(p => p.classList.remove('active'));
+        navLinks.forEach(l => {
+            l.style.color = "white";
+            l.style.opacity = "0.7";
+        });
+    }
+
+    // 綁定首頁和關於我的點擊事件 (前兩個按鈕)
+    navLinks.forEach((link, index) => {
+        if (index < 2) { 
+            link.addEventListener('click', () => {
+                resetActiveState();
+                const targetPage = document.getElementById(pageIds[index]);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                    link.style.color = "var(--intp-main)";
+                    link.style.opacity = "1";
+                }
+            });
+        }
+    });
+
+    // 專門綁定下拉選單內「競賽經歷」的點擊事件
+    if (subLinkExp) {
+        subLinkExp.addEventListener('click', (e) => {
+            e.stopPropagation(); // 阻斷事件冒泡，防止與母選單衝突
+            resetActiveState();
+            
+            const targetPage = document.getElementById('page-more');
+            if (targetPage) {
+                targetPage.classList.add('active');
+                
+                // 保持導航列「更多資訊」母按鈕高亮
+                const parentTrigger = document.getElementById('nav-more-trigger');
+                if (parentTrigger) {
+                    parentTrigger.style.color = "var(--intp-main)";
+                    parentTrigger.style.opacity = "1";
+                }
+            }
+        });
+    }
+
+    // --- 6. 滑鼠微光追蹤效果 ---
     panels.forEach(card => {
         card.addEventListener('mousemove', e => {
             const rect = card.getBoundingClientRect();

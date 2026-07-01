@@ -16,25 +16,64 @@
             <ul class="nav-links">
                 <li>首頁</li>
                 <li>關於我</li>
-                <li>更多資訊</li>
-            </ul>
+                <li class="dropdown-trigger" id="nav-more-trigger">
+                    更多資訊 <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i>
+                    <ul class="dropdown-menu">
+                        <li id="sub-link-exp">競賽經歷</li>
+                        </ul>
+                </li>
+                </ul>
         </div>
     </nav>
+<div class="main-container">
+    <section class="content-area">
 
-    <div class="main-container">
-       <section class="content-area">
-    <div class="glass-card main-post visible">
-        <div class="user-title" style="width: fit-content; margin-bottom: 20px;">SYSTEM STATUS: ACTIVE</div>
+        <div id="page-home" class="page-content active">
+            
+            <div class="glass-card main-post visible">
+                <div class="user-title" style="width: fit-content; margin-bottom: 20px;">SYSTEM STATUS: ACTIVE</div>
+                
+                <div class="main-display">
+                    <h2 id="update-time" class="user-name" style="font-size: 48px;">Link Start: LWY_Nexus</h2>
+                    <p class="user-date" style="opacity: 0.7; margin-top: 10px;">Neural Link Established // Protocol 1020</p>
+                </div>
+                
+                </div>
+            
+        </div> <div id="page-about" class="page-content">
+            </div>
+
+
+        <div id="page-more" class="page-content">
+            <div class="sao-panel main-post visible">
+                <div class="user-title" style="width: fit-content; margin-bottom: 30px; color: var(--intp-accent);">ROBOTICS ACHIEVEMENTS</div>
+                
+                <div class="experience-list" style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="exp-item" style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid var(--frc-red); border-radius: 15px; padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-family: 'Orbitron'; font-weight: 700;">FRC Team</span>
+                            <span style="font-size: 12px; opacity: 0.6;">2024 - Present</span>
+                        </div>
+                        <div style="font-size: 14px; color: var(--intp-main); font-weight: 600; margin-bottom: 10px;">Lead Programmer</div>
+                        <p style="margin: 0; font-size: 13px; opacity: 0.8; line-height: 1.6;">控制演算法編寫、感測器數據融合與視覺追蹤整合。</p>
+                    </div>
+
+                    <div class="exp-item" style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid var(--ftc-orange); border-radius: 15px; padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-family: 'Orbitron'; font-weight: 700;">FTC Team</span>
+                            <span style="font-size: 12px; opacity: 0.6;">2025 - Present</span>
+                        </div>
+                        <div style="font-size: 14px; color: var(--intp-main); font-weight: 600; margin-bottom: 10px;">Mechanism Designer</div>
+                        <p style="margin: 0; font-size: 13px; opacity: 0.8; line-height: 1.6;">進料機構設計、三維 CAD 建模與結構應力分析。</p>
+                    </div>
+                </div>
+            </div>
+        </div> </section> 
         
-        <div class="main-display">
-            <h2 id="update-time" class="user-name" style="font-size: 48px;">Link Start: LWY_Nexus</h2>
-            <p class="user-date" style="opacity: 0.7; margin-top: 10px;">Neural Link Established // Protocol 1020</p>
-        </div>
-
         <div class="metrics-grid">
             <div class="metric-card">
                 <span class="m-label">LOGIC_TYPE</span>
-                <span class="m-value">INTP-A</span>
+                <span class="m-value">INTP-T</span>
             </div>
             <div class="metric-card">
                 <span class="m-label">NETWORK</span>
@@ -122,7 +161,7 @@
                     </div>
                     <div class="id-item">
                         <i class="fa-solid fa-book-open"></i>
-                        <span class="id-value">英/化小老師、文化享讀小老師</span>
+                        <span class="id-value">英/生科小老師</span>
                     </div>
                 </div>
             </div>
