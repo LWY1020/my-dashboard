@@ -167,27 +167,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 dropdownMenu.classList.remove('active');
             }
         });
-
-        // === 修正後的選單連結處理 ===
-        // 選取下拉選單內的 <a> 標籤
+// === 優化後的選單連結處理 ===
         const menuLinks = dropdownMenu.querySelectorAll('li a'); 
 
         menuLinks.forEach(link => {
             const handleLinkClick = (e) => {
-                e.preventDefault();  // 阻止跳轉
-                e.stopPropagation(); // 防止觸發關閉事件
+                e.preventDefault();  
+                e.stopPropagation(); 
                 
                 console.log("子選項被點擊了：", link.innerText);
                 
-                // --- 在這裡呼叫你的頁面切換函式 ---
-                // 例如: showPage(link.id); 
+                // --- 這裡是你真正跳轉頁面的地方 ---
+                // 假設你原本的切換函式叫做 showPage，請依實際情況填入
+                // 如果是透過 ID 跳轉，請這樣寫：
+                if (link.id === 'sub-link-exp') {
+                    showPage('competition'); // 請確認你的函式名稱
+                } else if (link.id === 'sub-link-special') {
+                    showPage('special');     // 請確認你的函式名稱
+                }
                 
-                // 點擊後自動收起選單
+                // 點擊後收起選單
                 dropdownMenu.classList.remove('show');
                 dropdownMenu.classList.remove('active');
             };
 
-            // 同時綁定 click 與 touchstart
+            // 雙重事件綁定，確保 iPhone 靈敏度
             link.addEventListener('click', handleLinkClick);
             link.addEventListener('touchstart', handleLinkClick, { passive: false });
         });

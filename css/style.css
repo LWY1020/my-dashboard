@@ -466,7 +466,7 @@ body {
         display: flex !important;                
     }
 
-    /* 確保下拉選單裡面的 <li> 和 <a> 徹底解放，變成垂直區塊 */
+    /* 垂直選單容器與內部連結設定 */
     .dropdown-trigger ul li,
     .dropdown-menu li, 
     .submenu li,
@@ -474,13 +474,21 @@ body {
     .submenu a {
         display: block !important;
         width: 100% !important;
-        text-align: center !important;           /* 文字置中 */
-        white-space: nowrap !important;          /* 絕對不准斷行 */
-        font-size: 14px !important;              /* 稍微放大，方便粗手指點擊 */
-        padding: 8px 0 !important;               /* 增加上下點擊熱區 */
+        text-align: center !important;
+        white-space: nowrap !important;
+        font-size: 14px !important;
+        padding: 12px 0 !important;      /* 擴大點擊熱區，對手機更友善 */
         margin: 0 !important;
-        background: transparent !important;      /* 拔掉原本的膠囊背景色 */
+        background: transparent !important;
         border-radius: 4px !important;
+    
+    /* 修正顏色與底線問題 */
+        color: #ffffff !important;       /* 強制設定為白色 */
+        text-decoration: none !important; /* 強制移除底線 */
+        cursor: pointer !important;      /* 確保互動性 */
+    
+    /* 防止 iPhone 點擊時產生灰色陰影 */
+        -webkit-tap-highlight-color: transparent !important; 
     }
 
     /* 滑鼠懸停或點擊時的微光特效 */
