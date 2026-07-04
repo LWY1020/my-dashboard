@@ -1,3 +1,11 @@
+document.querySelectorAll('.dropdown-menu a').forEach((link, index) => {
+    link.addEventListener('click', (e) => {
+        // 彈出視窗顯示這個選項的文字，以及它是第幾個
+        alert("成功抓到連結！文字內容是：" + link.innerText + "，索引是：" + index);
+    });
+});
+
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- 1. 時間與 Uptime 計算 ---
     const updateTime = () => {
