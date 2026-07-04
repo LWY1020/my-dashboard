@@ -1,3 +1,19 @@
+/* 讓選單區域變成綠色，確保我們有點中它 */
+.dropdown-menu {
+    background-color: green !important;
+    opacity: 0.8 !important;
+    border: 5px solid yellow !important;
+    pointer-events: auto !important; /* 強制恢復點擊 */
+}
+
+/* 讓所有連結變成紅色 */
+.dropdown-menu a {
+    color: red !important;
+    font-weight: bold !important;
+    pointer-events: auto !important;
+}
+
+
 :root {
     --intp-main: #60a5fa; 
     --intp-accent: #a78bfa; 
