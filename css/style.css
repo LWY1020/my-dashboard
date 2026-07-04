@@ -159,8 +159,18 @@ body {
     .user-info { flex-direction: column; text-align: center; }
     .user-meta { align-items: center; }
     .user-identity { width: 100%; justify-content: center; }
-    
+    .dropdown-menu {
+        left: auto !important;           
+        right: 0 !important;             
+        transform: translateY(10px) !important; 
+        width: 130px !important;         
+    }
+    .dropdown-menu.show {
+        display: block !important;       
+        opacity: 1 !important;           
+    }
 }
+
 /* --- 下拉選單外層核心 --- */
 .dropdown-trigger {
     position: relative;
