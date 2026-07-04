@@ -1,19 +1,3 @@
-/* 讓選單區域變成綠色，確保我們有點中它 */
-.dropdown-menu {
-    background-color: green !important;
-    opacity: 0.8 !important;
-    border: 5px solid yellow !important;
-    pointer-events: auto !important; /* 強制恢復點擊 */
-}
-
-/* 讓所有連結變成紅色 */
-.dropdown-menu a {
-    color: red !important;
-    font-weight: bold !important;
-    pointer-events: auto !important;
-}
-
-
 :root {
     --intp-main: #60a5fa; 
     --intp-accent: #a78bfa; 
@@ -191,13 +175,16 @@ body {
 .dropdown-trigger {
     position: relative;
 }
-
 /* 下拉選單本體 */
-.dropdown-menu {
+#nav-dropdown-menu { /* 改用 ID 選取器，更精準 */
     position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
+    /* 這裡要根據你的導航欄高度手動調整，假設 nav 高度約 60px */
+    top: 60px; 
+    /* 這裡我們先設定一個相對位置，後續可以透過 JS 動態定位 */
+    left: auto;
+    right: 20px; 
+    transform: translateY(10px);
+    
     background: rgba(15, 23, 42, 0.85);
     backdrop-filter: var(--intp-blur);
     border: 1px solid var(--intp-glass-border);
@@ -207,12 +194,18 @@ body {
     width: 140px;
     box-shadow: var(--intp-shadow);
     
-    display: none;
+    display: none; /* 預設隱藏 */
     opacity: 0;
     transition: opacity 0.3s var(--jelly-curve), transform 0.3s var(--jelly-curve);
     z-index: 2000;
 }
 
+/* 顯示時的狀態 */
+#nav-dropdown-menu.show {
+    display: block !important;
+    opacity: 1;
+    transform: translateY(0);
+}
 /* 子選項樣式 */
 .dropdown-menu li {
     padding: 10px 18px !important;
@@ -234,11 +227,13 @@ body {
     transform: none !important; 
 }
 
-/* 滑鼠移入或點擊時，顯示下拉選單 */
-.dropdown-trigger:hover .dropdown-menu {
-    display: block;
-    opacity: 1;
-    transform: translateX(-50%) translateY(5px);
+/* 核心修改：移除舊的 :hover 觸發邏輯 */
+/* 改用 JS 控制的 .show class 來顯示選單 */
+#nav-dropdown-menu.show {
+    display: block !important;
+    opacity: 1 !important;
+    /* 這裡維持你原有的動畫變換 */
+    transform: translateY(0) !important;
 }
 
 /* 讓下拉選單箭頭有旋轉動效 */
@@ -443,73 +438,53 @@ body {
         cursor: pointer !important;                    /* 強制讓 iPhone 承認它是可以點擊的按鈕 */
         -webkit-tap-highlight-color: transparent !important; /* 拔掉 iPhone 點擊時內建的醜灰色陰影 */
     }
-.dropdown-trigger ul, 
-    .dropdown-menu, 
-    .submenu, 
-    [class*="sub-nav"], 
-    #nav-more-trigger + ul {
-        display: none !important;                /* 預設隱藏，由 JS 控制 */
-        position: absolute !important;           
-        top: 60px !important;                    /* 乖乖浮在 header 正下方 */
-        right: 4% !important;                    /* 對齊手機畫面右側留白 */
-        left: auto !important;                   /* 清除可能干擾的左側定位 */
-        
-        /* 🌟 強制掰成「垂直單列排版」 */
-        flex-direction: column !important;       
-        flex-wrap: nowrap !important;
-        gap: 8px !important;                     /* 選項與選項的上下間距 */
-        
-        /* 超精緻炫酷毛玻璃深色底 */
-        background: rgba(16, 20, 38, 0.98) !important; 
-        backdrop-filter: blur(12px) !important;
-        -webkit-backdrop-filter: blur(12px) !important;
-        border: 1px solid rgba(96, 165, 250, 0.4) !important; /* 藍色細邊框 */
-        border-radius: 8px !important;
-        padding: 10px 14px !important;           /* 給內部選項舒適的襯墊空間 */
-        
-        /* 寬度與高圖層防禦 */
-        width: 130px !important;                 /* 固定寬度，字絕對不會被擠爛 */
-        min-width: 120px !important;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
-        z-index: 999999 !important;              /* 史上最高圖層，絕對不准被底下的卡片遮住！ */
-    }
+/* 僅針對 #nav-dropdown-menu 的控制 */
+#nav-dropdown-menu {
+    display: none; /* 預設隱藏 */
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    
+    /* 排版邏輯 */
+    flex-direction: column;
+    gap: 8px;
+    
+    /* 視覺風格 */
+    background: rgba(16, 20, 38, 0.98);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(96, 165, 250, 0.4);
+    border-radius: 8px;
+    padding: 10px 14px;
+    width: 130px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    z-index: 9999; /* 給予適當的層級 */
+}
 
-    /* 🌟 當 JS 注入狀態，或者點擊激發時，強制改用 flex 垂直展現 */
-    .dropdown-menu.show, .dropdown-menu.active,
-    .submenu.show, .submenu.active,
-    .show, .active,
-    [style*="display: flex"] {
-        display: flex !important;                
-    }
-/* 僅在手機版 (螢幕寬度 < 768px) 時，將選單強制垂直顯示 */
+/* 透過 JS 注入 .show 類別來觸發顯示 */
+#nav-dropdown-menu.show {
+    display: flex !important; /* 確保選單展開 */
+}
+/* 僅在手機版時，優化選單內的連結樣式 */
 @media (max-width: 768px) {
-    .dropdown-menu li, 
-    .dropdown-menu a {
-        display: block !important;
-        width: 100% !important;
-        text-align: center !important;
-        white-space: nowrap !important;
-        font-size: 14px !important;
-        padding: 12px 0 !important;
-        margin: 0 !important;
-        background: transparent !important;
-        border-radius: 4px !important;
-        
-        /* 顏色與連結樣式修正 */
-        color: #ffffff !important;
-        text-decoration: none !important;
-        cursor: pointer !important;
-        -webkit-tap-highlight-color: transparent !important;
+    #nav-dropdown-menu li, 
+    #nav-dropdown-menu a {
+        display: block; /* 保持垂直排列 */
+        width: 100%;
+        text-align: center;
+        padding: 12px 0;
+        color: #ffffff;
+        text-decoration: none;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent; /* 移除點擊時的藍色預設框 */
     }
 
-    /* 手機版：選單容器設為最上層，防止被其他元素擋住 */
-    .dropdown-menu {
-        z-index: 9999 !important;
+    /* 滑鼠懸停或點擊時的微光特效 */
+    #nav-dropdown-menu a:active, 
+    #nav-dropdown-menu a:hover {
+        background: rgba(96, 165, 250, 0.2);
     }
 }
 
-    /* 滑鼠懸停或點擊時的微光特效 */
-    .dropdown-menu a:active, .submenu a:active {
-        background: rgba(96, 165, 250, 0.2) !important;
-    }
+#nav-dropdown-menu.show { display: flex !important; }
+
 }

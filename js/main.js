@@ -139,63 +139,60 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.querySelector('.sidebar');
     const pageIds = ['page-home', 'page-about', 'page-more', 'page-special'];
 
-    // === 2. 🎯 緊接著塞入：專治 iPhone 點不到下拉選單的防禦腳本 ===
-// 獲取按鈕與下拉選單元素
-    const moreBtn = document.getElementById('nav-more-trigger') || 
-                    document.querySelector('.dropdown-trigger');
-    
-    const dropdownMenu = document.querySelector('.submenu') || 
-                         document.querySelector('.dropdown-menu') || 
-                         document.querySelector('.more-dropdown');
+ // === 優化版：專治 iPhone 點不到下拉選單的防禦腳本 ===
 
-    if (moreBtn && dropdownMenu) {
-        function toggleDropdown(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            dropdownMenu.classList.toggle('show');
-            dropdownMenu.classList.toggle('active');
-        }
+// 1. 強制指定 ID，不再用 querySelector 猜測
+const moreBtn = document.getElementById('nav-more-trigger');
+const dropdownMenu = document.getElementById('nav-dropdown-menu');
 
-        // 綁定觸發按鈕的事件
-        moreBtn.addEventListener('click', toggleDropdown);
-        moreBtn.addEventListener('touchstart', toggleDropdown, { passive: false });
-
-        // 點擊畫面其他處收起選單
-        document.addEventListener('click', function(e) {
-            if (!moreBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
-                dropdownMenu.classList.remove('show');
-                dropdownMenu.classList.remove('active');
-            }
-        });
-// === 優化後的選單連結處理 ===
-        const menuLinks = dropdownMenu.querySelectorAll('li a'); 
-
-        menuLinks.forEach(link => {
-            const handleLinkClick = (e) => {
-                e.preventDefault();  
-                e.stopPropagation(); 
-                
-                console.log("子選項被點擊了：", link.innerText);
-                
-                // --- 這裡是你真正跳轉頁面的地方 ---
-                // 假設你原本的切換函式叫做 showPage，請依實際情況填入
-                // 如果是透過 ID 跳轉，請這樣寫：
-                if (link.id === 'sub-link-exp') {
-                    showPage('competition'); // 請確認你的函式名稱
-                } else if (link.id === 'sub-link-special') {
-                    showPage('special');     // 請確認你的函式名稱
-                }
-                
-                // 點擊後收起選單
-                dropdownMenu.classList.remove('show');
-                dropdownMenu.classList.remove('active');
-            };
-
-            // 雙重事件綁定，確保 iPhone 靈敏度
-            link.addEventListener('click', handleLinkClick);
-            link.addEventListener('touchstart', handleLinkClick, { passive: false });
-        });
+if (moreBtn && dropdownMenu) {
+    function toggleDropdown(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // 切換顯示狀態
+        dropdownMenu.classList.toggle('show');
+        dropdownMenu.classList.toggle('active');
+        console.log("選單狀態已切換");
     }
+
+    // 2. 綁定事件
+    moreBtn.addEventListener('click', toggleDropdown);
+    moreBtn.addEventListener('touchstart', (e) => {
+        toggleDropdown(e);
+    }, { passive: false });
+
+    // 3. 點擊畫面其他處收起選單
+    document.addEventListener('click', function(e) {
+        if (!moreBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+            dropdownMenu.classList.remove('show');
+            dropdownMenu.classList.remove('active');
+        }
+    });
+
+    // 4. 子選項處理
+    const menuLinks = dropdownMenu.querySelectorAll('li a'); 
+    menuLinks.forEach(link => {
+        const handleLinkClick = (e) => {
+            e.preventDefault();  
+            e.stopPropagation(); 
+            
+            // 點擊後收起選單
+            dropdownMenu.classList.remove('show');
+            dropdownMenu.classList.remove('active');
+            
+            // 觸發你的頁面切換邏輯
+            if (link.id === 'sub-link-exp') {
+                showPage('competition'); 
+            } else if (link.id === 'sub-link-special') {
+                showPage('special');    
+            }
+        };
+
+        link.addEventListener('click', handleLinkClick);
+        link.addEventListener('touchstart', handleLinkClick, { passive: false });
+    });
+}
 
     function resetActiveState() {
         pages.forEach(p => p.classList.remove('active'));
