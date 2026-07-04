@@ -171,6 +171,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    const menuLinks = dropdownMenu.querySelectorAll('li'); // 假設你的選項是 li
+menuLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.stopPropagation(); // 防止冒泡
+        
+        // 執行你的頁面切換邏輯
+        // 例如：window.location.href = ... 或 showPage(...)
+        console.log("子選項被點擊了：", link.innerText);
+        
+        // 點擊後自動收起選單
+        dropdownMenu.classList.remove('show');
+        dropdownMenu.classList.remove('active');
+    });
+});
+
     function resetActiveState() {
         pages.forEach(p => p.classList.remove('active'));
         navLinks.forEach(l => {
