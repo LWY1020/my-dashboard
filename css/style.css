@@ -465,31 +465,32 @@ body {
     [style*="display: flex"] {
         display: flex !important;                
     }
-
-    /* 垂直選單容器與內部連結設定 */
-    .dropdown-trigger ul li,
+/* 僅在手機版 (螢幕寬度 < 768px) 時，將選單強制垂直顯示 */
+@media (max-width: 768px) {
     .dropdown-menu li, 
-    .submenu li,
-    .dropdown-menu a,
-    .submenu a {
+    .dropdown-menu a {
         display: block !important;
         width: 100% !important;
         text-align: center !important;
         white-space: nowrap !important;
         font-size: 14px !important;
-        padding: 12px 0 !important;      /* 擴大點擊熱區，對手機更友善 */
+        padding: 12px 0 !important;
         margin: 0 !important;
         background: transparent !important;
         border-radius: 4px !important;
-    
-    /* 修正顏色與底線問題 */
-        color: #ffffff !important;       /* 強制設定為白色 */
-        text-decoration: none !important; /* 強制移除底線 */
-        cursor: pointer !important;      /* 確保互動性 */
-    
-    /* 防止 iPhone 點擊時產生灰色陰影 */
-        -webkit-tap-highlight-color: transparent !important; 
+        
+        /* 顏色與連結樣式修正 */
+        color: #ffffff !important;
+        text-decoration: none !important;
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: transparent !important;
     }
+
+    /* 手機版：選單容器設為最上層，防止被其他元素擋住 */
+    .dropdown-menu {
+        z-index: 9999 !important;
+    }
+}
 
     /* 滑鼠懸停或點擊時的微光特效 */
     .dropdown-menu a:active, .submenu a:active {
