@@ -140,52 +140,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageIds = ['page-home', 'page-about', 'page-more', 'page-special'];
 
     // === 2. 🎯 緊接著塞入：專治 iPhone 點不到下拉選單的防禦腳本 ===
+// 獲取按鈕與下拉選單元素
     const moreBtn = document.getElementById('nav-more-trigger') || 
                     document.querySelector('.dropdown-trigger');
     
-    // 自動抓取你的更多資訊下拉選單（包含常見的 submenu 或 dropdown-menu 類名）
     const dropdownMenu = document.querySelector('.submenu') || 
                          document.querySelector('.dropdown-menu') || 
                          document.querySelector('.more-dropdown');
 
     if (moreBtn && dropdownMenu) {
         function toggleDropdown(e) {
-            e.preventDefault();  // 防止 iPhone 瀏覽器誤觸跳頁
-            e.stopPropagation(); // 阻止點擊事件干擾到其他元素
-            
-            // 同時切換 show 跟 active 類名，確保迎合你的 CSS 設定
+            e.preventDefault();
+            e.stopPropagation();
             dropdownMenu.classList.toggle('show');
             dropdownMenu.classList.toggle('active');
-            console.log("iPhone 成功強制觸發下拉選單！");
         }
 
-        // 核心密技： click 與觸控事件雙管齊下，誰先有反應就聽誰的
+        // 綁定觸發按鈕的事件
         moreBtn.addEventListener('click', toggleDropdown);
         moreBtn.addEventListener('touchstart', toggleDropdown, { passive: false });
 
-        // 貼心加碼：點擊畫面其他空白處時，自動把下拉選單收起來
+        // 點擊畫面其他處收起選單
         document.addEventListener('click', function(e) {
             if (!moreBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
                 dropdownMenu.classList.remove('show');
                 dropdownMenu.classList.remove('active');
             }
         });
-    }
 
-    const menuLinks = dropdownMenu.querySelectorAll('li'); // 假設你的選項是 li
-menuLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.stopPropagation(); // 防止冒泡
-        
-        // 執行你的頁面切換邏輯
-        // 例如：window.location.href = ... 或 showPage(...)
-        console.log("子選項被點擊了：", link.innerText);
-        
-        // 點擊後自動收起選單
-        dropdownMenu.classList.remove('show');
-        dropdownMenu.classList.remove('active');
-    });
-});
+        // === 修正後的選單連結處理 ===
+        // 選取下拉選單內的 <a> 標籤
+        const menuLinks = dropdownMenu.querySelectorAll('li a'); 
+
+        menuLinks.forEach(link => {
+            const handleLinkClick = (e) => {
+                e.preventDefault();  // 阻止跳轉
+                e.stopPropagation(); // 防止觸發關閉事件
+                
+                console.log("子選項被點擊了：", link.innerText);
+                
+                // --- 在這裡呼叫你的頁面切換函式 ---
+                // 例如: showPage(link.id); 
+                
+                // 點擊後自動收起選單
+                dropdownMenu.classList.remove('show');
+                dropdownMenu.classList.remove('active');
+            };
+
+            // 同時綁定 click 與 touchstart
+            link.addEventListener('click', handleLinkClick);
+            link.addEventListener('touchstart', handleLinkClick, { passive: false });
+        });
+    }
 
     function resetActiveState() {
         pages.forEach(p => p.classList.remove('active'));
