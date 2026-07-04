@@ -1,3 +1,10 @@
+document.addEventListener('touchstart', (e) => {
+    // 點擊後，在 Console 或視窗顯示你到底點到了什麼元素
+    console.log("你點到的元素是：", e.target);
+    alert("你點到了：" + e.target.tagName + "，Class 是：" + e.target.className);
+}, { passive: false });
+
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- 1. 時間與 Uptime 計算 ---
     const updateTime = () => {
